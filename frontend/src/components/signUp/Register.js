@@ -8,27 +8,23 @@ import { useDispatch } from 'react-redux';
 import { newUser } from '../../reducers/registerReducer';
 import './register.css';
 import { newLogin } from '../../reducers/loginReducer';
+import * as yup from 'yup';
 
-const validate = values => {
-	const errors = {};
-	if(!values.email) {
-		errors.email = 'Required';
-	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
-		errors.email = 'Invalid Email';
-	}
-
-  if(!values.username){
-		errors.username = 'Required';
-	}
-
-	if(!values.password){
-		errors.password = 'Required';
-	}
-
-  if(values.password !== values.passwordConfirmation){
-		errors.password = 'Passwords must match';
-	}
-} 
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Por favor incluir un formato de email aceptable').required('Este campo es obligatorio'),
+  username: yup
+    .string()
+    .required('Este campo es obligatorio'),
+  password: yup
+    .string()
+    .required('Este campo es obligatorio'),
+  passwordConfirmation: yup
+    .string()
+    .required('Este campo es obligatorio')
+    .oneOf([yup.ref('password'), null], 'Password must be the same!'),
+});
 
 const Register = () => {
 	const dispatch = useDispatch();
@@ -61,16 +57,18 @@ const Register = () => {
 	const formik = useFormik({
 		initialValues: {
 			email: '',
+      username: '',
 			password: '',
       passwordConfirmation: '',
 		},
-		validate,
+		validationSchema: validationSchema,
 		onSubmit: onSubmit
 	});
 
 	return(
 		<Container className='register-form' sm="6">
 			<Form onSubmit={formik.handleSubmit}>
+        <h1 className='register-h1'>Registrarse</h1>
 				<Form.Group controlId="formBasicEmail" className="mb-3">
 					<Form.Label column sm="2">Email</Form.Label>
 					<Form.Control 
@@ -80,7 +78,7 @@ const Register = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.email}
 					/>
-					{formik.touched.email && formik.errors.email ? <div>{formik.errors.email}</div> : null}
+					{formik.touched.email && formik.errors.email ? <div className='errors'>{formik.errors.email}</div> : null}
 				</Form.Group>
         <Form.Group className="mb-3">
 					<Form.Label column sm="2">Username</Form.Label>
@@ -91,7 +89,7 @@ const Register = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.username}
 					/>
-					{formik.touched.username && formik.errors.username ? <div>{formik.errors.username}</div> : null}
+					{formik.touched.username && formik.errors.username ? <div className='errors'>{formik.errors.username}</div> : null}
 				</Form.Group>
 				<Form.Group controlId="formBasicPassword" className="mb-3">
 					<Form.Label column sm="2">Password</Form.Label>
@@ -102,7 +100,7 @@ const Register = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.password}
 					/>
-					{formik.touched.password && formik.errors.password ? <div>{formik.errors.password}</div> : null}
+					{formik.touched.password && formik.errors.password ? <div className='errors'>{formik.errors.password}</div> : null}
 				</Form.Group>
         <Form.Group className="mb-3">
 					<Form.Label column sm="2">Password Confirmation</Form.Label>
@@ -113,7 +111,7 @@ const Register = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.passwordConfirmation}
 					/>
-					{formik.touched.password && formik.errors.password ? <div>{formik.errors.password}</div> : null}
+					{formik.touched.password && formik.errors.password ? <div className='errors'>{formik.errors.password}</div> : null}
 				</Form.Group>
 				<button type='submit' className="btn btn-primary" disabled={disabled} style={{ marginBottom: 7 }}>Registrarse</button>
 			</Form>

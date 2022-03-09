@@ -32,7 +32,7 @@ const Home = () => {
                       <Card title={m.type} text={m.concept} number={m.amount} key={m.id}/>
                     ))}
                   </Container>
-                    <p>Agregar un movimeinto de dinero</p>
+                    <p>Agregar un movimiento de dinero</p>
                   <button type="button" className="btn btn-secondary">
                     <Link className="button-link" to={`/api/movements/update/${movements.moves[0].fk_user}`}>Agregar</Link>
                   </button>

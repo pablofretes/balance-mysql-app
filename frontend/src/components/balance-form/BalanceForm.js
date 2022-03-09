@@ -6,21 +6,19 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
 import './balanceForm.css';
+import * as yup from 'yup';
 
-const validate = values => {
-	const errors = {};
-	if(!values.concept) {
-		errors.concept = 'Concepto es Obligatorio';
-	}
-
-	if(!values.typemoney){
-		errors.typemoney = 'Tipo es Obligatorio';
-	}
-
-  if(!values.amount){
-		errors.amount = 'Monto es Obligatorio';
-	}
-} 
+const validationSchema = yup.object().shape({
+  concept: yup
+    .string()
+    .required('Este campo es obligatorio'),
+  typemoney: yup
+    .string()
+    .required('Este campo es obligatorio'),
+  amount: yup
+    .string()
+    .required('Este campo es obligatorio'),
+});
 
 const BalanceForm = ({ dispatchFunction }) => {
 	const dispatch = useDispatch();
@@ -62,7 +60,7 @@ const BalanceForm = ({ dispatchFunction }) => {
 			typemoney: 'Ingreso',
       amount: '',
 		},
-		validate,
+		validationSchema: validationSchema,
 		onSubmit: onSubmit
 	});
 
@@ -87,7 +85,7 @@ const BalanceForm = ({ dispatchFunction }) => {
             <option value='Psicólogo'>Psicólogo</option>
             <option value='Obra Social'>Obra Social</option>
           </Form.Select>
-					{formik.touched.concept && formik.errors.concept ? <div>{formik.errors.concept}</div> : null}
+					{formik.touched.concept && formik.errors.concept ? <div className='errors'>{formik.errors.concept}</div> : null}
 				</Form.Group>
 				<Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Tipo</Form.Label>
@@ -101,7 +99,7 @@ const BalanceForm = ({ dispatchFunction }) => {
             <option value="Ingreso">Ingreso</option>
             <option value="Egreso">Egreso</option>
           </Form.Select>
-					{formik.touched.typemoney && formik.errors.typemoney ? <div>{formik.errors.typemoney}</div> : null}
+					{formik.touched.typemoney && formik.errors.typemoney ? <div className='errors'>{formik.errors.typemoney}</div> : null}
 				</Form.Group>
         <Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Monto</Form.Label>
@@ -112,7 +110,7 @@ const BalanceForm = ({ dispatchFunction }) => {
 						onBlur={formik.handleBlur}
 						value={formik.values.amount}
 					/>
-					{formik.touched.amount && formik.errors.amount ? <div>{formik.errors.amount}</div> : null}
+					{formik.touched.amount && formik.errors.amount ? <div className='errors'>{formik.errors.amount}</div> : null}
 				</Form.Group>
 				<button type='submit' className="btn btn-primary" disabled={disabled} style={{ marginBottom: 7 }}>Enviar</button>
 			</Form>
