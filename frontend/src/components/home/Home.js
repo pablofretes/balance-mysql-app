@@ -18,7 +18,7 @@ const Home = () => {
         <div>
           {movements.length === 0 || movements.balance === null ? (
             <Container>
-              <h1>Por Favor Introduzca Un Monto</h1>
+              <h2>Por Favor Introduzca Un Monto</h2>
               <BalanceForm dispatchFunction={postNewBalance}/>
             </Container>
           ) : (
