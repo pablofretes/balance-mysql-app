@@ -1,12 +1,9 @@
 .register-form {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-flow: column wrap;
-	border-radius: 7px;
-	border: 1px solid #372248;
-	width: 250px !important;
-  height: 450px !important;
-	color: white;
-  margin-top: 150px;
+	width: 300px !important;
+  height: 520px !important;
+  color: white;
+}
+
+.register-h1 {
+  color: white;
 }
