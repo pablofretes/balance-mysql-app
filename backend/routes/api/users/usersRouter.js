@@ -17,11 +17,11 @@ router.post('/register', [
   const existingUsername = await User.findOne({ where: { username: username } });
 
   if(existingUsername) {
-    return res.status(409).json({ error: `An account whit this username: ${username} already exists, please use another one`});
+    return res.status(409).json({ error: `An account with this username: ${username} already exists, please use another one`});
   };
 
   if(existingEmail) {
-    return res.status(409).json({ error: `An account whit this email: ${email} already exists, please use another one`});
+    return res.status(409).json({ error: `An account with this email: ${email} already exists, please use another one`});
   };
 
   const errors = validationResult(req);
@@ -42,7 +42,7 @@ router.post('/login', async(req, res) => {
     const passConfirm = bcrypt.compareSync(req.body.password, user.password);
     if(passConfirm) {
       const userAndToken = {
-        user: user,
+        userId: user.id,
         token: createToken(user),
       };
       res.json(userAndToken);
