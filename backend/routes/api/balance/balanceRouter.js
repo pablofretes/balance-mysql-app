@@ -48,7 +48,7 @@ router.post('/post/:id', async (req, res) => {
   const newMovement = await Movement.create(movement);
   console.log(newBalance, newMovement)
 
-  res.json({ balance: newBalance, movement: newMovement });
+  res.json({ balance: newBalance, moves: [newMovement] });
 });
 
 router.post('/update/:id', async (req, res) => {
