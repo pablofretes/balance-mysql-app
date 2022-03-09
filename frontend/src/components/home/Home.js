@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import BalanceForm from '../balance-form/BalanceForm';
-import { changeBalance, postNewBalance } from '../../reducers/movementsReducer';
+import { postNewBalance } from '../../reducers/movementsReducer';
 import Card from '../balance-card/Card';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './home.css';
 
 const Home = () => {
-  const dispatch = useDispatch();
   const loggedUser = useSelector(state => state.login);
   const movements = useSelector(state => state.movements);
   console.log(movements)
@@ -16,27 +16,27 @@ const Home = () => {
     <div>
       {loggedUser == null ? <h1>Debe estar logeado para usar esta app</h1> : (
         <div>
-          {movements.length === 0 || movements.balance.total === null ? (
+          {movements.length === 0 || movements.balance === null ? (
             <Container>
               <h1>Por Favor Introduzca Un Monto</h1>
               <BalanceForm dispatchFunction={postNewBalance}/>
             </Container>
           ) : (
-            <div>
+            <div >
               {movements.length !== 0 && movements.balance.total !== undefined && (
-                <Container>
-                <Card title="Balance" text={movements.balance.total} number={null}/>
-                <Container>
-                  Últimos movimientos
-                  {movements.moves.map((m) => (
-                    <Card title={m.type} text={m.concept} number={m.amount} key={m.id}/>
-                  ))}
-                </Container>
-                Agregar un movimeinto de dinero
-                <button type="button" className="btn btn-primary" style={{ textDecoration: 'none' } }>
-                  <Link to={`/api/movements/update/${movements.moves[0].fk_user}`} style={{ textDecoration: 'none' } }>Agregar</Link>
+                <div className='container'>
+                  <Card title="Balance" text={movements.balance.total} number={null}/>
+                  <Container className='container-no-shadow'>
+                    <p>Últimos movimientos</p>
+                    {movements.moves.map((m) => (
+                      <Card title={m.type} text={m.concept} number={m.amount} key={m.id}/>
+                    ))}
+                  </Container>
+                    <p>Agregar un movimeinto de dinero</p>
+                  <button type="button" className="btn btn-secondary">
+                    <Link className="button-link" to={`/api/movements/update/${movements.moves[0].fk_user}`}>Agregar</Link>
                   </button>
-              </Container>
+              </div>
               )}
             </div>
           )}

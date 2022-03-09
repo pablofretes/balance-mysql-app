@@ -5,6 +5,7 @@ import { Form, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
+import './balanceForm.css';
 
 const validate = values => {
 	const errors = {};
@@ -41,7 +42,7 @@ const BalanceForm = ({ dispatchFunction }) => {
 		};
 		try {
       if(user){
-        dispatch(dispatchFunction(user.user.id, newMovement));
+        dispatch(dispatchFunction(user.userId, newMovement));
         navigate('/');
       }
 		} catch (error) {
@@ -66,7 +67,7 @@ const BalanceForm = ({ dispatchFunction }) => {
 	});
 
 	return(
-		<Container className='login-form'>
+		<Container className='balance-form'>
 			<Form onSubmit={formik.handleSubmit}>
 				<Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Concepto</Form.Label>

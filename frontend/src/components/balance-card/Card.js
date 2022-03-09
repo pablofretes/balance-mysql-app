@@ -1,21 +1,18 @@
 import React from 'react';
-import { Card as BootCard, Container } from 'react-bootstrap';
+import './card.css';
 
 const Card = ({ title, text, number }) => {
   return (
-    <Container>
-      <BootCard>
-        <BootCard.Title>{title}</BootCard.Title>
-        <BootCard.Text>
-          {text}
-        </BootCard.Text>
+      <div className="card">
+        <h2>{title === 'negative' ? 'Egreso' : title === 'positive' ? 'Ingreso' : title}</h2>
+        <div className="line"></div>
+        <p>{text}</p>
         {number !== null && (
-          <BootCard.Text>
-            {number}
-          </BootCard.Text>
-        )}
-      </BootCard>
-    </Container>
+            <p>
+              {number}
+            </p>
+          )}
+      </div>
   )
 };
 
