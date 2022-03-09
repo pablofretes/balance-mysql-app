@@ -13,15 +13,10 @@ export const newUser = (credentials) => {
 	return async dispatch => {
 		try {
 			const userLog = await registerUser(credentials);
-			window.localStorage.setItem('user-balance-token', JSON.stringify(userLog));
 			dispatch({
 				type: "NEW_USER",
 				payload: userLog
 			});
-      dispatch({
-        type: "LOG_IN",
-        payload: userLog
-      })
 		} catch (error) {
 			console.log(error);
 			dispatch({

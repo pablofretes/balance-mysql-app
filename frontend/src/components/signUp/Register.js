@@ -7,6 +7,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { useDispatch } from 'react-redux';
 import { newUser } from '../../reducers/registerReducer';
 import './register.css';
+import { newLogin } from '../../reducers/loginReducer';
 
 const validate = values => {
 	const errors = {};
@@ -42,7 +43,9 @@ const Register = () => {
 			password: event.password,
 		};
 		try {
-			dispatch(newUser(credentials));
+			await dispatch(newUser(credentials));
+      const login = { email: credentials.email, password: credentials.password };
+      dispatch(newLogin(login));
 			navigate('/');
 		} catch (error) {
 			await MySwal.fire({
