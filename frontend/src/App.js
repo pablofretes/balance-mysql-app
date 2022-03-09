@@ -23,7 +23,7 @@ const App = () => {
   useEffect(() => {
     console.log(user);
     if(user !== null){
-      dispatch(retrieveBalance(user.user.id));
+      dispatch(retrieveBalance(user.userId));
     }
 	}, [dispatch, user]);
 
