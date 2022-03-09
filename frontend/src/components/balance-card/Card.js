@@ -6,10 +6,10 @@ const Card = ({ title, text, number }) => {
       <div className="card">
         <h2>{title === 'negative' ? 'Egreso' : title === 'positive' ? 'Ingreso' : title}</h2>
         <div className="line"></div>
-        <p>{text}</p>
+        <p>{title === 'Balance' ? `$ ${text}` : text}</p>
         {number !== null && (
             <p>
-              {number}
+              $ {number}
             </p>
           )}
       </div>
