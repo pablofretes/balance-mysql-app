@@ -1,0 +1,120 @@
+.nav {
+  padding: 3vw 0;
+  width: 100%;
+	background: black;
+	position: fixed;
+	z-index: 90;
+	top: 0;
+	left: 0;
+	right: 0;
+	box-shadow: 1px 1px 1px 1px white;
+}
+
+.navbar-words {
+  font-size: 2vw;
+  font-weight: 200;
+  font-family: Cairo, sans-serif;
+}
+
+.container-navbar {
+  text-align: right;
+}
+
+.nav-list {
+  width: 90%;
+  margin: 0;
+  height: 0;
+  padding: 0;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-flow: row nowrap;
+  list-style: none;
+}
+
+.nav-list li {
+  position: relative;
+  display: list-item;
+  padding: 2px 5px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.nav-item {
+  padding: 0.8rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.social-icon {
+  width: 1.8vw;
+  height: 1.8vw;
+  display: inline-block;
+  margin: 0;
+  transition: 1s ease;
+}
+
+.social-icon:hover {
+  fill: #007bff;
+  transition: 1s ease;
+}
+
+.select-language {
+  border-radius: 6px;
+  font-family: Cairo, monospace;
+  font-size: 25px;
+  font-size: 1.7vw;
+  background-color:#574aaa;
+  color: white;
+  transition: 1s ease;
+}
+
+.select-language:hover {
+  background-color: #007bff;
+  transition: 1s ease;
+}
+
+.button-nav {
+  font-family: 'Cairo' !important;
+  font-weight: 'bolder' !important;
+  font-size: 1.5vw !important;
+  color: white !important;
+	float: right !important;
+}
+
+@media screen and (max-width: 800px){
+	.nav{
+		height: 3vh;
+	}
+
+	.button-nav {
+		font-size: 18px;
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.nav{
+		height: 3vh;
+	}
+
+	.button-nav {
+		font-size: 14px;
+		width: 50%;
+	}
+}
+
+
+@media screen and (max-width: 400px){
+  .nav{
+		height: 2vh;
+	}
+
+	.button-nav {
+		font-size: 10px;
+		width: 50%;
+	}
+}

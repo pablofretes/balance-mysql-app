@@ -1,0 +1,13 @@
+.register-form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column wrap;
+	background-color: #F46036;
+	border-radius: 7px;
+	border: 1px solid #372248;
+	width: 250px;
+	height: 400px;
+  margin-top: 150px;
+	color: white;
+}
