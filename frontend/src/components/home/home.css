@@ -1,0 +1,30 @@
+.container {
+	height: 100%;
+	background-color: #111;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column wrap;
+  padding: 10px;
+  margin-top: 20px;
+  box-shadow: 11px 11px 4px 2px rgba(42,43,37,0.81);
+}
+
+h1 {
+  color: black;
+}
+
+p, h1 {
+  color: azure;
+}
+
+.button-link {
+  text-decoration: none;
+  color: white;
+  margin-bottom: 7px;
+}
+
+.container-no-shadow {
+  box-shadow: none;
+}

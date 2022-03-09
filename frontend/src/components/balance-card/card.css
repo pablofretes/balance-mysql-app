@@ -1,0 +1,29 @@
+.card {
+	width: 400px;
+	height: 220px;
+	background-color: black !important;
+	color: #fff;
+	box-sizing: border-box;
+	padding: 40px;
+	border-radius: 2px;
+	font-family: Cairo, sans-serif;
+  box-shadow: none;
+	margin: 15px 15px;
+}
+
+h2 {
+  margin: 0;
+}
+
+.line {
+	width: 320px;
+	height: 5px;
+	margin-top: 10px;
+}
+
+p {
+  margin-top: 15px;
+	font-size: 15px;
+	line-height: 1.6;
+	color: white;
+}

@@ -80,14 +80,25 @@
 .button-nav {
   font-family: 'Cairo' !important;
   font-weight: 'bolder' !important;
-  font-size: 1.5vw !important;
+  font-size: 1.5vw;
   color: white !important;
 	float: right !important;
 }
 
 @media screen and (max-width: 800px){
 	.nav{
-		height: 3vh;
+		height: 5vh;
+	}
+
+	.button-nav {
+		font-size: 22px;
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.nav{
+		height: 5vh;
 	}
 
 	.button-nav {
@@ -96,25 +107,15 @@
 	}
 }
 
-@media screen and (max-width: 600px){
-	.nav{
-		height: 3vh;
+
+@media screen and (max-width: 400px){
+  .nav{
+		height: 5vh;
 	}
 
 	.button-nav {
 		font-size: 14px;
 		width: 50%;
-	}
-}
-
-
-@media screen and (max-width: 400px){
-  .nav{
-		height: 2vh;
-	}
-
-	.button-nav {
-		font-size: 10px;
-		width: 50%;
+    margin-top: 5px;
 	}
 }
