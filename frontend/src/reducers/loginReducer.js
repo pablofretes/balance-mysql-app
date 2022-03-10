@@ -19,7 +19,6 @@ export const existingLogin = () => {
 	if(loggedUserJSON){
 		const userLog = JSON.parse(loggedUserJSON);
     setToken(userLog.token);
-    console.log(userLog.token)
 		return {
 			type: "LOGGED_IN",
 			payload: userLog,
@@ -38,10 +37,8 @@ export const newLogin = (credentials) => {
 	return async dispatch => {
 		try {
 			const userLog = await login(credentials);
-      console.log(userLog)
 			window.localStorage.setItem('user-balance-token', JSON.stringify(userLog));
       setToken(userLog.token);
-      console.log(userLog.token)
 			dispatch({
 				type: "LOG_IN",
 				payload: userLog,

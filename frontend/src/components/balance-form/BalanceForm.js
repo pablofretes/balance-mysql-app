@@ -29,10 +29,7 @@ const BalanceForm = ({ dispatchFunction }) => {
 
 	const onSubmit = async (event) => {
 		setDisabled(true)
-    console.log(event)
     const typeMoney = event.typemoney === 'Ingreso' ? 'positive' : 'negative';
-    console.log(event.typemoney, typeMoney, 'sdasdads')
-    console.log(event.concept)
 		const newMovement = {
 			concept: event.concept,
 			type: typeMoney,

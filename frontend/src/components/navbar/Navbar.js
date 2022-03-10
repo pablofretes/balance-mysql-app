@@ -7,8 +7,7 @@ import { removeLoggedUser } from '../../reducers/loginReducer';
 const Navbar = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(store => store.login);
-	console.log(user);
-	
+  
   const handleLogOut = () => {
 		dispatch(removeLoggedUser());
   }

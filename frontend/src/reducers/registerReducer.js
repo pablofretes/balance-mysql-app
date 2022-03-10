@@ -18,7 +18,7 @@ export const newUser = (credentials) => {
 				payload: userLog
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			dispatch({
 				type: "LOG_OUT"
 			});

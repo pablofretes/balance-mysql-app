@@ -29,7 +29,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/post/:id', async (req, res) => {
 
-  console.log(req.body, 'asdjkaldkjasd');
   const balance = {
     total: req.body.amount,
     fk_user: req.params.id
@@ -42,11 +41,8 @@ router.post('/post/:id', async (req, res) => {
     fk_user: req.params.id,
   };
 
-  console.log(movement, 'movement');
-
   const newBalance = await Balance.create(balance);
   const newMovement = await Movement.create(movement);
-  console.log(newBalance, newMovement)
 
   res.json({ balance: newBalance, moves: [newMovement] });
 });

@@ -10,7 +10,6 @@ import './home.css';
 const Home = () => {
   const loggedUser = useSelector(state => state.login);
   const movements = useSelector(state => state.movements);
-  console.log(movements)
 
   return (
     <div>

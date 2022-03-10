@@ -14,14 +14,12 @@ import BalanceForm from './components/balance-form/BalanceForm';
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.login);
-  console.log(user);
 
   useEffect(() => {
 		dispatch(existingLogin());
 	}, [dispatch]);
 
   useEffect(() => {
-    console.log(user);
     if(user !== null){
       dispatch(retrieveBalance(user.userId));
     }
