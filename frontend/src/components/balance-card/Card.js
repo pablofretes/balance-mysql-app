@@ -6,16 +6,16 @@ const Card = ({ title, text, number, created, updated }) => {
       <div className="card">
         <h2>{title === "negative" ? "Egreso" : title === "positive" ? "Ingreso" : title}</h2>
         <div className="line-card"></div>
-        <p>{title === "Balance" ? `$ ${text}` : text}</p>
+        <p className="card-text" >{title === "Balance" ? `$ ${text}` : text}</p>
         {number !== null && (
-          <p>
+          <p className="card-text">
             $ {number}
           </p>
         )}
         <div className="line-card"></div>
         <div className="dates-card">
-          {created !== undefined && <p className='dates-text'>Creado: {created.substr(0,10)}</p>}
-          {updated !== created && <p className='dates-text'>Último cambio: {updated.substr(0,10)}</p>}
+          {created !== undefined && <p className="card-text" >Creado: {created.substr(0,10)}</p>}
+          {updated !== created && <p className="card-text" >Último cambio: {updated.substr(0,10)}</p>}
         </div>
       </div>
   )
