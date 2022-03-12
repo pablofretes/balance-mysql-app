@@ -67,9 +67,7 @@ router.post('/add/:id', async (req, res) => {
 });
 
 router.put('/update/:id', async (req, res) => {
-  console.log('body', req.body)
   const movementToUpdate = await Movement.findOne({ where: { id: req.body.id } });
-  console.log('movementupdate', movementToUpdate);
 
   if(movementToUpdate) {
     await movementToUpdate.update({ type: req.body.type });
@@ -83,16 +81,12 @@ router.put('/update/:id', async (req, res) => {
 });
 
 router.delete('/delete/:id', async (req, res) => {
-  console.log('bodyyyyyyyy deleteeeeee',req.body);
-  console.log('param', req.params.id);
   const movementToDelete = await Movement.findOne({ where: { id: req.params.id } });
   await movementToDelete.destroy();
 });
 
 router.get('/movement/:id', async (req, res) => {
-  console.log('id', req.params.id);
   const movement = await Movement.findOne({ where: { id: req.params.id } });
-  console.log('movement', movement)
 
   if(movement) {
     res.json(movement);
