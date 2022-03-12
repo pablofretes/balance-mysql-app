@@ -1,9 +1,9 @@
-h1 {
+.home-h1 {
   color: black;
   text-align: center;
 }
 
-p, h2 {
+p, .home-h2 {
   color: azure;
   text-align: center;
 }
@@ -16,4 +16,14 @@ p, h2 {
 
 .container-no-shadow {
   box-shadow: none;
+}
+
+.buttons-card {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 85%;
+  gap: 10px;
+  justify-content: center;
 }
