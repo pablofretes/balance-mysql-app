@@ -5,9 +5,9 @@ import { Form, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBalance, retrieveBalance } from '../../reducers/movementsReducer';
 import './balanceForm.css';
 import * as yup from 'yup';
+import { changeMovement, retrieveBalance } from '../../reducers/movementsReducer';
 
 const validationSchema = yup.object().shape({
   concept: yup
@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
     .required('Este campo es obligatorio'),
 });
 
-const BalanceForm = () => {
+const UpdateForm = ({ movementToChange }) => {
 	const dispatch = useDispatch();
 	const [disabled, setDisabled] = useState(false);
   const user = useSelector(state => state.login);
@@ -31,16 +31,17 @@ const BalanceForm = () => {
 	const onSubmit = async (event) => {
 		setDisabled(true);
     const typeMoney = event.typeOfMovement === 'Ingreso' ? 'positive' : 'negative';
-    
+
     const newMovement = {
       concept: event.concept,
       type: typeMoney,
       amount: Number(event.amount),
+      id: movementToChange.id,
     };
 
 		try {
       if(user){
-        await dispatch(changeBalance(user.userId, newMovement));
+        dispatch(changeMovement(newMovement));
         navigate('/');
         dispatch(retrieveBalance(user.userId));
       }
@@ -48,18 +49,25 @@ const BalanceForm = () => {
 			await MySwal.fire({
 				title: 'Error',
 				icon: 'error',
-				text: 'Hubo un error',
+				text: error,
 			});
 		}
 		setDisabled(false);
 	}
+  // If we are editing a movement we want the initial values to be the original values
+  // Otherwise we want some default values
+
+  let typeFromOrigin = movementToChange.type === 'positive' ? 'Ingreso' : 'Egreso';
+  let amountFromOrigin = movementToChange.amount.toString();
+
+  const initialValues = {
+    concept: movementToChange.concept,
+    typeOfMovement: typeFromOrigin,
+    amount: amountFromOrigin,
+  };
 
 	const formik = useFormik({
-		initialValues: {
-      concept: 'Comida',
-      typeOfMovement: 'Ingreso',
-      amount: '0',
-    },
+		initialValues: initialValues,
 		validationSchema: validationSchema,
 		onSubmit: onSubmit
 	});
@@ -67,6 +75,7 @@ const BalanceForm = () => {
 	return(
 		<Container className='balance-form'>
 			<Form onSubmit={formik.handleSubmit}>
+        {movementToChange !== null && <h1>Cambiar</h1>}
 				<Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Concepto</Form.Label>
 					<Form.Select 
@@ -118,4 +127,4 @@ const BalanceForm = () => {
 	)
 }
 
-export default BalanceForm;
+export default UpdateForm;

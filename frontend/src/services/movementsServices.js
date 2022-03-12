@@ -29,13 +29,45 @@ export const postBalance = async (id, newBalance) => {
   return response.data;
 };
 
-export const updateBalance = async (id, newBalance) => {
+export const postNewMovement = async (id, newBalance) => {
   const config = {
     headers: { 
       Authorization: token 
     }
   };
 
-  const response = await axios.post(`${baseUrl}/update/${id}`, newBalance, config);
+  const response = await axios.post(`${baseUrl}/add/${id}`, newBalance, config);
+  return response.data;
+};
+
+export const updateMovement = async (newMovement) => {
+  const config = {
+    headers: { 
+      Authorization: token 
+    }
+  };
+  const response = await axios.put(`${baseUrl}/update/${newMovement.id}`, newMovement, config);
+  return response.data;
+};
+
+export const deleteMovement = async (id) => {
+  const config = {
+    headers: { 
+      Authorization: token 
+    }
+  };
+
+  const response = await axios.delete(`${baseUrl}/delete/${id}`, config);
+  return response.data;
+};
+
+export const getMovement = async (id) => {
+  const config = {
+    headers: {
+      Authorization: token
+    }
+  };
+
+  const response = await axios.get(`${baseUrl}/movement/${id}`, config);
   return response.data;
 };

@@ -8,10 +8,10 @@ const Card = ({ title, text, number }) => {
         <div className="line"></div>
         <p>{title === 'Balance' ? `$ ${text}` : text}</p>
         {number !== null && (
-            <p>
-              $ {number}
-            </p>
-          )}
+          <p>
+            $ {number}
+          </p>
+        )}
       </div>
   )
 };

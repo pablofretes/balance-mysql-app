@@ -13,12 +13,7 @@
 
 h2 {
   margin: 0;
-}
-
-.line {
-	width: 320px;
-	height: 5px;
-	margin-top: 10px;
+  text-align: center;
 }
 
 p {
@@ -26,4 +21,12 @@ p {
 	font-size: 15px;
 	line-height: 1.6;
 	color: white;
+}
+
+.line {
+	width: 320px;
+	height: 5px;
+	margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: crimson;
 }
