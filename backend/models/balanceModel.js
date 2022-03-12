@@ -15,6 +15,7 @@ class BalanceModel extends Model {
         unique: true,
       },
       total: DataTypes.INTEGER,
+      initialAmount: DataTypes.INTEGER,
       fk_user: {
         type: DataTypes.INTEGER,
         allowNull: true,

@@ -6,28 +6,42 @@ router.get('/:id', async (req, res) => {
   const recentMovements = await Movement.findAll({ where: { fk_user: req.params.id } });
 
   if(currentBalance) {
-    currentBalance.total = recentMovements.reduce((acc, cur) => {
-      if(cur.type === 'positive'){
-        acc += cur.amount;
-      }
+    const startingBalance = currentBalance.initialAmount;
+    if(recentMovements.length !== 0){
+      const newAmount = recentMovements.reduce((acc, cur) => {
+        if(cur.type === 'positive'){
+          acc += cur.amount;
+        }
+    
+        if(cur.type === 'negative'){
+          acc -= cur.amount;
+        }
+    
+        return acc;
+      }, 0);
+
+      currentBalance.total = startingBalance + newAmount;
+
+      await currentBalance.save();
+
+      const responseObject = {
+        balance: currentBalance,
+        moves: recentMovements,
+      };
   
-      if(cur.type === 'negative'){
-        acc -= cur.amount;
-      }
+      res.json(responseObject);
+    } else {
+      currentBalance.total = startingBalance;
+
+      await currentBalance.save();
   
-      return acc;
-    }, 0);
+      const responseObject = {
+        balance: currentBalance,
+        moves: [],
+      };
 
-    await currentBalance.save();
-  };
-
-  if(currentBalance) {
-    const responseObject = {
-      balance: currentBalance,
-      moves: recentMovements,
-    };
-
-    res.json(responseObject);
+      res.json(responseObject);
+    }
   } else {
     const responseObject = {
       balance: {},
@@ -38,23 +52,17 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.post('/post/balance/:id')
+
 router.post('/post/:id', async (req, res) => {
   const balance = {
-    total: req.body.amount,
+    initialAmount: req.body.amount,
     fk_user: req.params.id
-  }
-
-  const movement = {
-    amount: req.body.amount,
-    type: req.body.type,
-    concept: req.body.concept,
-    fk_user: req.params.id,
   };
 
   const newBalance = await Balance.create(balance);
-  const newMovement = await Movement.create(movement);
 
-  res.json({ balance: newBalance, moves: [newMovement] });
+  res.json({ balance: newBalance, moves: [] });
 });
 
 router.post('/add/:id', async (req, res) => {
