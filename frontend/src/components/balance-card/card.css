@@ -1,7 +1,8 @@
 .card {
   display: flex;
   justify-content: center;
-	width: 500px;
+  align-items: center;
+	width: 450px;
 	height: 220px;
 	background-color: black !important;
 	color: #fff;
@@ -9,9 +10,11 @@
 	padding: 40px;
 	border-radius: 2px;
 	font-family: Cairo, sans-serif;
-  align-items: center;
   box-shadow: none;
-	margin: 15px 15px;
+	margin: auto;
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 h2 {
@@ -19,8 +22,7 @@ h2 {
   text-align: center;
 }
 
-p {
-  margin-top: 15px;
+.card-text {
 	font-size: 15px;
 	line-height: 1.6;
 	color: white;
@@ -43,13 +45,9 @@ p {
   justify-content: center;
 }
 
-.dates-text {
-  font-weight: bold;
-}
-
 @media screen and (max-width: 500px) {
   .card {
-    width: 300px;
+    width: 310px;
   }
 
   .dates-card {

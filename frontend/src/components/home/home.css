@@ -3,9 +3,13 @@
   text-align: center;
 }
 
-p, .home-h2 {
-  color: azure;
+.home-h2 {
+  color: black;
   text-align: center;
+}
+
+p {
+	color: white;
 }
 
 .button-link {
@@ -16,6 +20,11 @@ p, .home-h2 {
 
 .container-no-shadow {
   box-shadow: none;
+  width: 460px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
 }
 
 .buttons-card {
@@ -26,4 +35,10 @@ p, .home-h2 {
   width: 85%;
   gap: 10px;
   justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+  .container-no-shadow {
+    width: 320px !important;
+  }
 }
