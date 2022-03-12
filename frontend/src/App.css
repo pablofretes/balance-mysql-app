@@ -14,7 +14,7 @@ html, body {
 .container {
 	height: 100%;
 	background-color: #111;
-	width: 100%;
+	width: 95%;
 	display: flex;
 	justify-content: center;
   align-items: center;
@@ -27,4 +27,10 @@ html, body {
 h1 {
   color: azure;
   text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 80%;
+  }
 }
