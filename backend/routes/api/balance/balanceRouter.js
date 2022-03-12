@@ -17,16 +17,25 @@ router.get('/:id', async (req, res) => {
   
       return acc;
     }, 0);
-  }
 
-  await currentBalance.save();
-
-  const responseObject = {
-    balance: currentBalance,
-    moves: recentMovements,
+    await currentBalance.save();
   };
 
-  res.json(responseObject);
+  if(currentBalance) {
+    const responseObject = {
+      balance: currentBalance,
+      moves: recentMovements,
+    };
+
+    res.json(responseObject);
+  } else {
+    const responseObject = {
+      balance: {},
+      moves: [],
+    };
+
+    res.json(responseObject);
+  }
 });
 
 router.post('/post/:id', async (req, res) => {

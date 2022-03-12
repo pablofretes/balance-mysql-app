@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
     .required('Este campo es obligatorio'),
 });
 
-const BalanceForm = () => {
+const BalanceForm = ({ dispatchFunction }) => {
 	const dispatch = useDispatch();
 	const [disabled, setDisabled] = useState(false);
   const user = useSelector(state => state.login);
@@ -40,7 +40,7 @@ const BalanceForm = () => {
 
 		try {
       if(user){
-        await dispatch(changeBalance(user.userId, newMovement));
+        await dispatch(dispatchFunction(user.userId, newMovement));
         navigate('/');
         dispatch(retrieveBalance(user.userId));
       }

@@ -37,17 +37,17 @@ const Home = () => {
     <div>
       {loggedUser == null ? <h1 className='home-h1'>Debe estar logeado para usar esta app</h1> : (
         <div>
-          {movements.length === 0 || movements.balance === null ? (
-            <Container>
+          {movements.moves.length === 0 || Object.keys(movements.balance).length === 0 ? (
+            <div>
               <h2 className='home-h2'>Por Favor Introduzca Un Monto</h2>
               <BalanceForm dispatchFunction={postNewBalance}/>
-            </Container>
+            </div>
           ) : (
             <div >
               {movements.length !== 0 && movements.balance.total !== undefined && (
                 <div className='container'>
                   <Card title="Balance" text={movements.balance.total} number={null}/>
-                  <Container className='container-no-shadow'>
+                  <div className='container-no-shadow'>
                     <p>Últimos movimientos</p>
                     {movements.moves.map((m) => (
                       <div key={m.id}>
@@ -58,7 +58,7 @@ const Home = () => {
                         </div>
                       </div>
                     ))}
-                  </Container>
+                  </div>
                     <p>Agregar un movimiento de dinero</p>
                   <button type="button" className="btn btn-secondary" onClick={() => addMovement(movements.balance["fk_user"])}>
                     Agregar
