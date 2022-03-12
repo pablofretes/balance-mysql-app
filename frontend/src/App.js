@@ -6,12 +6,12 @@ import Navbar from './components/navbar/Navbar';
 import Register from './components/signUp/Register';
 import Login from './components/login/Login';
 import Home from './components/home/Home';
-import { changeBalance, postNewBalance, retrieveBalance } from './reducers/movementsReducer';
+import { retrieveBalance } from './reducers/movementsReducer';
 import { existingLogin } from './reducers/loginReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import BalanceForm from './components/balance-form/BalanceForm'; 
 import { updatedMovementToNull } from './reducers/updatedMovementReducer';
 import UpdateConfirm from './components/balance-form/UpdateConfirm';
+import MovementForm from './components/balance-form/MovementForm';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,8 +36,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/api/movements/movement/:id" element={<UpdateConfirm />}/>
-        <Route path="/api/movements/post/:id" element={<BalanceForm dispatchFunction={postNewBalance} />} />
-        <Route path="/api/movements/add/:id" element={<BalanceForm dispatchFunction={changeBalance}/>} />
+        <Route path="/api/movements/add/:id" element={<MovementForm />} />
         <Route path="/api/user/register" element={<Register />}/>
         <Route path="/api/user/login" element={<Login />}/>
         <Route path="/" element={<Home />}/>

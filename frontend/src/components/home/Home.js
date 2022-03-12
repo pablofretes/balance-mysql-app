@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BalanceForm from '../balance-form/BalanceForm';
-import { postNewBalance, removeMovement, retrieveBalance } from '../../reducers/movementsReducer';
+import { removeMovement, retrieveBalance } from '../../reducers/movementsReducer';
 import Card from '../balance-card/Card';
-import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import './home.css';
 import { selectMovementToUpdate } from '../../reducers/updatedMovementReducer';
@@ -37,10 +36,10 @@ const Home = () => {
     <div>
       {loggedUser == null ? <h1 className='home-h1'>Debe estar logeado para usar esta app</h1> : (
         <div>
-          {movements.moves.length === 0 || Object.keys(movements.balance).length === 0 ? (
+          {movements.balance == undefined || Object.keys(movements.balance).length === 0 ? (
             <div>
-              <h2 className='home-h2'>Por Favor Introduzca Un Monto</h2>
-              <BalanceForm dispatchFunction={postNewBalance}/>
+              <h2 className='home-h2'>Por Favor Introduzca Un Balance Inicial</h2>
+              <BalanceForm />
             </div>
           ) : (
             <div >

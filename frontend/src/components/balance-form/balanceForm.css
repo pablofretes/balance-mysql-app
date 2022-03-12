@@ -4,3 +4,10 @@
   box-shadow: 11px 11px 4px 2px rgba(42,43,37,0.81) !important;
 	color: white;
 }
+
+.balance-form-short {
+	width: 300px !important;
+	height: 280px !important;
+  box-shadow: 11px 11px 4px 2px rgba(42,43,37,0.81) !important;
+	color: white;
+}

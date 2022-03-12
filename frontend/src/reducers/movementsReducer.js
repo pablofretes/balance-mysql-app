@@ -17,11 +17,11 @@ const movementsReducer = (state = initialState, action) => {
     case "POST_BALANCE":{
       const stateBalanceMoves = {
         balance: action.payload.balance,
-        moves: action.payload.moves
+        moves: state.moves,
       };
-      return stateBalanceMoves
+      return stateBalanceMoves;
     };
-    case "UPDATE_BALANCE":{
+    case "POST_MOVEMENT":{
       const newMoves = [...state.moves, action.payload]
       const stateBalanceMoves = {
         balance: state.balance,
@@ -96,7 +96,7 @@ export const changeBalance = (id, newBalance) => {
     try {
       const balance = await postNewMovement(id, newBalance);
       dispatch({
-        type: "UPDATE_BALANCE",
+        type: "POST_MOVEMENT",
         payload: balance
       });
     } catch (error) {

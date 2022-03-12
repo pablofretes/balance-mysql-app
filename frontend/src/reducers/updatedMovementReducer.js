@@ -15,7 +15,6 @@ export const selectMovementToUpdate = (id) => {
   return async dispatch => {
     try {
       const movement = await getMovement(id);
-      console.log('movement', movement)
       dispatch({
         type: "SELECT_MOVEMENT",
         payload: movement

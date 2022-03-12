@@ -5,23 +5,17 @@ import { Form, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBalance, retrieveBalance } from '../../reducers/movementsReducer';
+import { postNewBalance, retrieveBalance } from '../../reducers/movementsReducer';
 import './balanceForm.css';
 import * as yup from 'yup';
 
 const validationSchema = yup.object().shape({
-  concept: yup
-    .string()
-    .required('Este campo es obligatorio'),
-  typeOfMovement: yup
-    .string()
-    .required('Este campo es obligatorio'),
   amount: yup
     .string()
     .required('Este campo es obligatorio'),
 });
 
-const BalanceForm = ({ dispatchFunction }) => {
+const BalanceForm = () => {
 	const dispatch = useDispatch();
 	const [disabled, setDisabled] = useState(false);
   const user = useSelector(state => state.login);
@@ -30,17 +24,14 @@ const BalanceForm = ({ dispatchFunction }) => {
 
 	const onSubmit = async (event) => {
 		setDisabled(true);
-    const typeMoney = event.typeOfMovement === 'Ingreso' ? 'positive' : 'negative';
     
     const newMovement = {
-      concept: event.concept,
-      type: typeMoney,
       amount: Number(event.amount),
     };
 
 		try {
       if(user){
-        await dispatch(dispatchFunction(user.userId, newMovement));
+        dispatch(postNewBalance(user.userId, newMovement));
         navigate('/');
         dispatch(retrieveBalance(user.userId));
       }
@@ -56,8 +47,6 @@ const BalanceForm = ({ dispatchFunction }) => {
 
 	const formik = useFormik({
 		initialValues: {
-      concept: 'Comida',
-      typeOfMovement: 'Ingreso',
       amount: '0',
     },
 		validationSchema: validationSchema,
@@ -65,42 +54,8 @@ const BalanceForm = ({ dispatchFunction }) => {
 	});
 
 	return(
-		<Container className='balance-form'>
+		<Container className='balance-form-short'>
 			<Form onSubmit={formik.handleSubmit}>
-				<Form.Group controlId="formBasicText" className="mb-3">
-					<Form.Label column sm="2">Concepto</Form.Label>
-					<Form.Select 
-						type='select'
-						name='concept'
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.concept}
-					>
-            <option value='Comida'>Comida</option>
-            <option value='Impuestos'>Impuestos</option>
-            <option value='Ocio'>Ocio</option>
-            <option value='Sueldo'>Sueldo</option>
-            <option value='Transporte'>Transporte</option>
-            <option value='Medicación'>Medicación</option>
-            <option value='Psicólogo'>Psicólogo</option>
-            <option value='Obra Social'>Obra Social</option>
-          </Form.Select>
-					{formik.touched.concept && formik.errors.concept ? <div className='errors'>{formik.errors.concept}</div> : null}
-				</Form.Group>
-				<Form.Group controlId="formBasicText" className="mb-3">
-					<Form.Label column sm="2">Tipo</Form.Label>
-					<Form.Select 
-						type='select'
-						name='typeOfMovement'
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.typeOfMovement}
-					>
-            <option value="Ingreso">Ingreso</option>
-            <option value="Egreso">Egreso</option>
-          </Form.Select>
-					{formik.touched.typeOfMovement && formik.errors.typeOfMovement ? <div className='errors'>{formik.errors.typeOfMovement}</div> : null}
-				</Form.Group>
         <Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Monto</Form.Label>
 					<Form.Control 
