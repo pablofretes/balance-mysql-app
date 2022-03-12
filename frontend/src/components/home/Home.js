@@ -51,7 +51,7 @@ const Home = () => {
                     <p>Últimos movimientos</p>
                     {movements.moves.map((m) => (
                       <div key={m.id}>
-                        <Card title={m.type} text={m.concept} number={m.amount} moveId={m.id}/>
+                        <Card title={m.type} text={m.concept} number={m.amount} moveId={m.id} created={m.createdAt} updated={m.updatedAt} />
                         <div className='buttons-card'>
                           <button className='btn btn-warning' onClick={() => selectMove(m.id)}>Cambiar</button>
                           <button className='btn btn-danger' onClick={() => deleteOneMovement(m)}>Eliminar</button>
