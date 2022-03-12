@@ -5,6 +5,7 @@ import { Form, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
+import { changeBalance, retrieveBalance } from '../../reducers/movementsReducer';
 import './balanceForm.css';
 import * as yup from 'yup';
 
@@ -12,7 +13,7 @@ const validationSchema = yup.object().shape({
   concept: yup
     .string()
     .required('Este campo es obligatorio'),
-  typemoney: yup
+  typeOfMovement: yup
     .string()
     .required('Este campo es obligatorio'),
   amount: yup
@@ -20,7 +21,7 @@ const validationSchema = yup.object().shape({
     .required('Este campo es obligatorio'),
 });
 
-const BalanceForm = ({ dispatchFunction }) => {
+const BalanceForm = () => {
 	const dispatch = useDispatch();
 	const [disabled, setDisabled] = useState(false);
   const user = useSelector(state => state.login);
@@ -28,35 +29,37 @@ const BalanceForm = ({ dispatchFunction }) => {
 	let navigate = useNavigate();
 
 	const onSubmit = async (event) => {
-		setDisabled(true)
-    const typeMoney = event.typemoney === 'Ingreso' ? 'positive' : 'negative';
-		const newMovement = {
-			concept: event.concept,
-			type: typeMoney,
+		setDisabled(true);
+    const typeMoney = event.typeOfMovement === 'Ingreso' ? 'positive' : 'negative';
+    
+    const newMovement = {
+      concept: event.concept,
+      type: typeMoney,
       amount: Number(event.amount),
-		};
+    };
+
 		try {
       if(user){
-        dispatch(dispatchFunction(user.userId, newMovement));
+        await dispatch(changeBalance(user.userId, newMovement));
         navigate('/');
+        dispatch(retrieveBalance(user.userId));
       }
 		} catch (error) {
 			await MySwal.fire({
 				title: 'Error',
 				icon: 'error',
-				text: 'Something went wrong!',
+				text: 'Hubo un error',
 			});
-			window.localStorage.removeItem('user-balance-token');
 		}
 		setDisabled(false);
 	}
 
 	const formik = useFormik({
 		initialValues: {
-			concept: 'Comida',
-			typemoney: 'Ingreso',
-      amount: '',
-		},
+      concept: 'Comida',
+      typeOfMovement: 'Ingreso',
+      amount: '0',
+    },
 		validationSchema: validationSchema,
 		onSubmit: onSubmit
 	});
@@ -88,15 +91,15 @@ const BalanceForm = ({ dispatchFunction }) => {
 					<Form.Label column sm="2">Tipo</Form.Label>
 					<Form.Select 
 						type='select'
-						name='typemoney'
+						name='typeOfMovement'
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
-						value={formik.values.typemoney}
+						value={formik.values.typeOfMovement}
 					>
             <option value="Ingreso">Ingreso</option>
             <option value="Egreso">Egreso</option>
           </Form.Select>
-					{formik.touched.typemoney && formik.errors.typemoney ? <div className='errors'>{formik.errors.typemoney}</div> : null}
+					{formik.touched.typeOfMovement && formik.errors.typeOfMovement ? <div className='errors'>{formik.errors.typeOfMovement}</div> : null}
 				</Form.Group>
         <Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Monto</Form.Label>
