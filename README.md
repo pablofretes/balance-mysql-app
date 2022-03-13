@@ -20,4 +20,4 @@
  ## How do I use this project?
  
  This project is currently being hosted here: https://desolate-castle-51796.herokuapp.com/ .
- Users can use the following credentials: { email: username@mockuser.com, password: 123456 }.
+ Users can use the following credentials: { email: username@fakeuser.com, password: 123456 }.
