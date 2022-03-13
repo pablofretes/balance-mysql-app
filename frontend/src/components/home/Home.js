@@ -36,14 +36,14 @@ const Home = () => {
     <div>
       {loggedUser == null ? <h1 className='home-h1'>Debe estar logeado para usar esta app</h1> : (
         <div>
-          {movements.balance == undefined || Object.keys(movements.balance).length === 0 ? (
+          {movements == undefined || movements.balance == undefined || Object.keys(movements.balance).length === 0 ? (
             <div>
               <h2 className='home-h2'>Por Favor Introduzca Un Balance Inicial</h2>
               <BalanceForm />
             </div>
           ) : (
             <div >
-              {movements.length !== 0 && movements.balance.total !== undefined && (
+              {movements != undefined && movements.balance != undefined && movements.balance.total != undefined && (
                 <div className='container'>
                   <Card title="Balance" text={movements.balance.total} number={null}/>
                   <div className='container-no-shadow'>
