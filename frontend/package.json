@@ -51,5 +51,12 @@
   "devDependencies": {
     "deep-freeze": "^0.0.1"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001/",
+  "resolutions": {
+    "mini-css-extract-plugin": "2.4.5"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
