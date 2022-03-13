@@ -5,6 +5,8 @@ router.get('/:id', async (req, res) => {
   const currentBalance = await Balance.findOne({ where: { fk_user: req.params.id } });
   const recentMovements = await Movement.findAll({ where: { fk_user: req.params.id } });
 
+  console.log('get balance', currentBalance, recentMovements)
+
   if(currentBalance) {
     const startingBalance = currentBalance.initialAmount;
     if(recentMovements.length !== 0){
@@ -52,20 +54,22 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/post/balance/:id')
-
 router.post('/post/:id', async (req, res) => {
+  console.log('post body', req.body)
   const balance = {
     initialAmount: req.body.amount,
     fk_user: req.params.id
   };
 
   const newBalance = await Balance.create(balance);
+  console.log('newBalance', newBalance)
 
   res.json({ balance: newBalance, moves: [] });
 });
 
 router.post('/add/:id', async (req, res) => {
+
+  console.log('add movement', req.body);
 
   const movement = {
     amount: req.body.amount,
@@ -85,6 +89,7 @@ router.post('/add/:id', async (req, res) => {
 
 router.put('/update/:id', async (req, res) => {
   const movementToUpdate = await Movement.findOne({ where: { id: req.body.id } });
+  console.log('update movement', req.body)
 
   if(movementToUpdate) {
     await movementToUpdate.update({ type: req.body.type });
@@ -104,6 +109,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 router.get('/movement/:id', async (req, res) => {
   const movement = await Movement.findOne({ where: { id: req.params.id } });
+  console.log('get movement', req.body)
 
   if(movement) {
     res.json(movement);
