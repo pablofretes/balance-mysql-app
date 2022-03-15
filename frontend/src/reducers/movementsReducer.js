@@ -1,4 +1,5 @@
-import { getBalance, postBalance, postNewMovement, deleteMovement, updateMovement } from "../services/movementsServices";
+import { postNewMovement, deleteMovement, updateMovement } from "../services/movementsServices";
+import { getBalance, postBalance, updateBalance } from "../services/balanceServices";
 
 const initialState = {
   balance: {},
@@ -21,6 +22,13 @@ const movementsReducer = (state = initialState, action) => {
       };
       return stateBalanceMoves;
     };
+    case "UPDATE_BALANCE":{
+      const stateBalanceMoves = {
+        balance: action.payload.balance,
+        moves: state.moves,
+      };
+      return stateBalanceMoves
+    }
     case "POST_MOVEMENT":{
       const newMoves = [...state.moves, action.payload]
       const stateBalanceMoves = {
@@ -92,6 +100,20 @@ export const postNewBalance = (id, newBalance) => {
 };
 
 export const changeBalance = (id, newBalance) => {
+  return async dispatch => {
+    try {
+      const balance = await updateBalance(id, newBalance);
+      dispatch({
+        type: "UPDATE_BALANCE",
+        payload: balance, 
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+export const newMovement = (id, newBalance) => {
   return async dispatch => {
     try {
       const balance = await postNewMovement(id, newBalance);

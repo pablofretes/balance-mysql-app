@@ -11,6 +11,7 @@ import { existingLogin } from './reducers/loginReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { updatedMovementToNull } from './reducers/updatedMovementReducer';
 import UpdateConfirm from './components/balance-form/UpdateConfirm';
+import BalanceUpdateConfirm from './components/balance-form/BalanceUpdateConfirm';
 import MovementForm from './components/balance-form/MovementForm';
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
       <Routes>
         <Route path="/api/movements/movement/:id" element={<UpdateConfirm />}/>
         <Route path="/api/movements/add/:id" element={<MovementForm />} />
+        <Route path="/api/balance/update/:id" element={<BalanceUpdateConfirm />} />
         <Route path="/api/user/register" element={<Register />}/>
         <Route path="/api/user/login" element={<Login />}/>
         <Route path="/" element={<Home />}/>

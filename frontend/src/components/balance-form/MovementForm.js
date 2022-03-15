@@ -5,7 +5,7 @@ import { Form, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBalance, retrieveBalance } from '../../reducers/movementsReducer';
+import { newMovement, retrieveBalance } from '../../reducers/movementsReducer';
 import './balanceForm.css';
 import * as yup from 'yup';
 
@@ -40,7 +40,7 @@ const MovementForm = () => {
 
 		try {
       if(user){
-        await dispatch(changeBalance(user.userId, newMovement));
+        await dispatch(newMovement(user.userId, newMovement));
         navigate('/');
         dispatch(retrieveBalance(user.userId));
       }

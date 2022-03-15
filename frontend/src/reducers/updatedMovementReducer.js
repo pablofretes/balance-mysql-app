@@ -1,4 +1,5 @@
 import { getMovement } from '../services/movementsServices';
+import { getBalance } from '../services/balanceServices';
 
 const updatedMovementReducer = (state = null, action) => {
   switch (action.type) {
@@ -24,6 +25,20 @@ export const selectMovementToUpdate = (id) => {
     }
   };
 };
+
+export const selectBalanceToUpdate = (id) => {
+  return async dispatch => {
+    try {
+      const balance = await getBalance(id);
+      dispatch({
+        type: "SELECT_MOVEMENT",
+        payload: balance
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+}
 
 export const updatedMovementToNull = () => {
   return { type: "UPDATED_MOVEMENT_NULL" };
