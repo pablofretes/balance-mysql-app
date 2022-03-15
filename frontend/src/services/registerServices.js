@@ -1,8 +1,23 @@
-import axios from 'axios';
+import jQuery from 'jquery';
 
 const baseUrl = '/api/user';
 
 export const registerUser = async (credentials) => {
-  const response = await axios.post(`${baseUrl}/register`, credentials);
-  return response.data;
+
+  let response;
+
+  await jQuery.ajax(`${baseUrl}/register`, {
+    method: 'POST',
+    accepts: 'application/json',
+    dataType: 'json',
+    data: credentials,
+    success: function (data) {
+      response = data;
+    },
+    error: function (error) {
+      console.error({ error: error });
+    },
+  });
+
+  return response;
 };
