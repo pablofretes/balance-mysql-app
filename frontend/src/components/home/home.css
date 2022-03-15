@@ -18,17 +18,61 @@ p {
   margin-bottom: 7px;
 }
 
-.container-no-shadow {
-  box-shadow: none;
-  width: 460px;
+.root-containers {
+  margin: auto;
+	margin-top: 8rem;
+  width: 95%;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
+  flex-flow: row nowrap;
+	background: #1a759f;
+	border-radius: 8px;
+  box-shadow: 11px 11px 4px 2px rgba(42,43,37,0.81);
+  padding-bottom: 1px;
+  margin-bottom: 100px;
+}
+
+.container-home {
+  border-radius: 10px;
+  width: 30%;
+  height: 450px;
+  display: flex;
+  flex-flow: column nowrap;
   align-items: center;
-  flex-flow: column wrap;
+  text-align: center;
+  padding: 10px;
+  color: #a5a58d;
+	background-color: #52b69a;
+	margin-top: 1rem;
+	margin-left: 1.5rem;
+}
+
+.container-cards {
+  width: 80%;
+  background-color: #52b69a;
+	padding: 10px;
+	margin-left: 1rem;
+	border-radius: 8px;
+	margin-top: 1rem;
+	margin-right: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  column-gap: 2%;
+  row-gap: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.add-movement-text {
+  margin-top: 45px;
+  color: black;
+  margin-bottom: 35px;
 }
 
 .buttons-card {
   margin: 0 auto;
+  margin-top: 20px;
   text-align: center;
   display: flex;
   flex-flow: row nowrap;
@@ -37,8 +81,112 @@ p {
   justify-content: center;
 }
 
-@media screen and (max-width: 500px) {
-  .container-no-shadow {
-    width: 320px !important;
-  }
+@media screen and (max-width: 1000px){
+	.root-containers {
+		flex-flow: column wrap;
+		justify-content: center;
+		align-items: center;
+		width: 85%;
+		height: 100%;
+	}
+
+	.container-home {
+		width: 90%;
+		margin-left: 0rem;
+	}
+
+	.container-cards {
+		width: 90%;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 0.3rem;
+		margin-bottom: 0.3rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+		align-items: center;
+	}
+}
+
+@media screen and (max-width: 800px){
+	.root-containers {
+		flex-flow: column wrap;
+		justify-content: center;
+		align-items: center;
+		width: 85%;
+		height: 100%;
+	}
+
+	.container-home {
+		width: 90%;
+		margin-left: 0rem;
+	}
+
+	.container-cards {
+		width: 90%;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 0.3rem;
+		margin-bottom: 0.3rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+		align-items: center;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.root-containers {
+		flex-flow: column wrap;
+		justify-content: center;
+		align-items: center;
+		width: 85%;
+		height: 100%;
+	}
+
+	.container-home {
+		width: 90%;
+		margin-left: 0rem;
+	}
+
+	.container-cards {
+		width: 90%;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 0.3rem;
+		margin-bottom: 0.3rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+		align-items: center;
+	}
+}
+
+
+@media screen and (max-width: 400px){
+	.root-containers {
+		flex-flow: column wrap;
+		justify-content: center;
+		align-items: center;
+		width: 85%;
+		height: 100%;
+	}
+
+	.container-home {
+		width: 90%;
+		margin-left: 0rem;
+	}
+
+	.container-cards {
+		width: 90%;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 0.3rem;
+		margin-bottom: 0.3rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+		align-items: center;
+	}
+
 }

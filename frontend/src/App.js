@@ -33,7 +33,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className='app'>
       <Navbar />
       <Routes>
         <Route path="/api/movements/movement/:id" element={<UpdateConfirm />}/>
