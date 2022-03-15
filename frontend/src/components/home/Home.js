@@ -5,7 +5,7 @@ import { removeMovement, retrieveBalance } from '../../reducers/movementsReducer
 import Card from '../balance-card/Card';
 import { useNavigate } from 'react-router';
 import './home.css';
-import { selectMovementToUpdate } from '../../reducers/updatedMovementReducer';
+import { selectMovementToUpdate, selectBalanceToUpdate } from '../../reducers/updatedMovementReducer';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -25,6 +25,11 @@ const Home = () => {
     dispatch(selectMovementToUpdate(id));
     navigate(`/api/movements/movement/${id}`)
   };
+
+  const selectBalance = (id) => {
+    dispatch(selectBalanceToUpdate(id));
+    navigate(`/api/balance/update/${id}`);
+  }
 
   const addMovement = (id) => {
     if(typeof id === 'number'){
@@ -46,6 +51,9 @@ const Home = () => {
               {movements != undefined && movements.balance != undefined && movements.balance.total != undefined && (
                 <div className='container'>
                   <Card title="Balance" text={movements.balance.total} number={null}/>
+                  <div className='buttons-card'>
+                          <button className='btn btn-warning' onClick={() => selectBalance(movements.balance.fk_user)}>Cambiar</button>
+                  </div>
                   <div className='container-no-shadow'>
                     <p>Últimos movimientos</p>
                     {movements.moves.map((m) => (
