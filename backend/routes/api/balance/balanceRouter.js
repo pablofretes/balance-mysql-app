@@ -4,6 +4,7 @@ const { Balance, Movement } = require('../../../db');
 router.get('/:id', async (req, res) => {
   const currentBalance = await Balance.findOne({ where: { fk_user: req.params.id } });
   const recentMovements = await Movement.findAll({ where: { fk_user: req.params.id } });
+  console.log('recentm', recentMovements)
 
   if(currentBalance) {
     const startingBalance = currentBalance.initialAmount;
@@ -24,9 +25,12 @@ router.get('/:id', async (req, res) => {
 
       await currentBalance.save();
 
+      const tenLastMoves = recentMovements.reverse().slice(0, 10);
+      console.log('tenlast', tenLastMoves.length)
+
       const responseObject = {
         balance: currentBalance,
-        moves: recentMovements,
+        moves: tenLastMoves,
       };
   
       res.json(responseObject);
