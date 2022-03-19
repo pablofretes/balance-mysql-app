@@ -16,25 +16,25 @@ const Navbar = () => {
   <nav className='nav' data-cy='navbar'>
   <div className='container-navbar'>
     <ul className='nav-list'>
-    	<li className='nav-item'>
+    	<li className='nav-item' data-testid='home-link'>
         <Link to="/" data-cy='home-button' className='button-nav'>
         Inicio
         </Link>
     	</li>
     	{user !== null ? 
         <li>
-          <Link to="/api/user/login" onClick={handleLogOut}  data-cy="logout-button" className='button-nav'>
+          <Link to="/api/user/login" onClick={handleLogOut} className='button-nav' data-testid='logout-link'>
           Salir
           </Link>
         </li>
      	:
         <li>
-          <Link  to="/api/user/login" className='button-nav' data-cy="login-button">Entrar</Link>
+          <Link  to="/api/user/login" className='button-nav' data-testid='login-link'>Entrar</Link>
         </li>
       }
       {user == null ?
         <li>
-          <Link to="/api/user/register" data-cy="register-button" className='button-nav'>
+          <Link to="/api/user/register" className='button-nav' data-testid='register-link'>
           Registrar
           </Link>
         </li>
