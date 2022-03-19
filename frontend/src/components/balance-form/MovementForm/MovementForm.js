@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import { Form, Container } from 'react-bootstrap';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import { useDispatch, useSelector } from 'react-redux';
-import './balanceForm.css';
+import '../balanceForm.css';
 import * as yup from 'yup';
-import { changeMovement, retrieveBalance } from '../../reducers/movementsReducer';
 
 const validationSchema = yup.object().shape({
   concept: yup
@@ -21,53 +16,13 @@ const validationSchema = yup.object().shape({
     .required('Este campo es obligatorio'),
 });
 
-const UpdateForm = ({ movementToChange }) => {
-	const dispatch = useDispatch();
-	const [disabled, setDisabled] = useState(false);
-  const user = useSelector(state => state.login);
-	const MySwal = withReactContent(Swal);
-	let navigate = useNavigate();
-
-	const onSubmit = async (event) => {
-		setDisabled(true);
-    const typeMoney = event.typeOfMovement === 'Ingreso' ? 'positive' : 'negative';
-
-    const newMovement = {
-      concept: event.concept,
-      type: typeMoney,
-      amount: Number(event.amount),
-      id: movementToChange.id,
-    };
-
-		try {
-      if(user){
-        dispatch(changeMovement(newMovement));
-        navigate('/');
-        dispatch(retrieveBalance(user.userId));
-      }
-		} catch (error) {
-			await MySwal.fire({
-				title: 'Error',
-				icon: 'error',
-				text: error,
-			});
-		}
-		setDisabled(false);
-	}
-  // If we are editing a movement we want the initial values to be the original values
-  // Otherwise we want some default values
-
-  let typeFromOrigin = movementToChange.type === 'positive' ? 'Ingreso' : 'Egreso';
-  let amountFromOrigin = movementToChange.amount.toString();
-
-  const initialValues = {
-    concept: movementToChange.concept,
-    typeOfMovement: typeFromOrigin,
-    amount: amountFromOrigin,
-  };
-
+const MovementForm = ({ onSubmit, disabled }) => {
 	const formik = useFormik({
-		initialValues: initialValues,
+		initialValues: {
+      concept: 'Comida',
+      typeOfMovement: 'Ingreso',
+      amount: '0',
+    },
 		validationSchema: validationSchema,
 		onSubmit: onSubmit
 	});
@@ -75,12 +30,12 @@ const UpdateForm = ({ movementToChange }) => {
 	return(
 		<Container className='balance-form'>
 			<Form onSubmit={formik.handleSubmit}>
-        {movementToChange !== null && <h1>Cambiar</h1>}
 				<Form.Group controlId="formBasicText" className="mb-3">
 					<Form.Label column sm="2">Concepto</Form.Label>
 					<Form.Select 
 						type='select'
 						name='concept'
+            data-testid='concept-movement-form-input'
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.concept}
@@ -101,6 +56,7 @@ const UpdateForm = ({ movementToChange }) => {
 					<Form.Select 
 						type='select'
 						name='typeOfMovement'
+            data-testid='type-movement-form-input'
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.typeOfMovement}
@@ -115,6 +71,7 @@ const UpdateForm = ({ movementToChange }) => {
 					<Form.Control 
 						type='text'
 						name='amount'
+            data-testid='amount-movement-form-input'
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.amount}
@@ -127,4 +84,4 @@ const UpdateForm = ({ movementToChange }) => {
 	)
 }
 
-export default UpdateForm;
+export default MovementForm;

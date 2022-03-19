@@ -24,21 +24,21 @@ const Card = ({ title, text, number, created, updated, moveId, movement }) => {
   };
   return (
       <div className="card">
-        <h2 className='card-h2'>{title === "negative" ? "Egreso" : title === "positive" ? "Ingreso" : title}</h2>
-        <p className="card-text" >{title === "Balance" ? `$ ${text}` : text}</p>
+        <h2 className='card-h2' data-testid="card-title">{title === "negative" ? "Egreso" : title === "positive" ? "Ingreso" : title}</h2>
+        <p className="card-text" data-testid="card-text">{title === "Balance" ? `$ ${text}` : text}</p>
         {number !== null && (
-          <p className="card-text">
+          <p className="card-text" data-testid="card-money">
             $ {number}
           </p>
         )}
         <div className="dates-card">
-          {created !== undefined && <p className="card-text" >Creado: {created.substr(0,10)}</p>}
-          {updated !== created && <p className="card-text" >Último cambio: {updated.substr(0,10)}</p>}
+          {created !== undefined && <p className="card-text" data-testid="card-created">Creado: {created.substr(0,10)}</p>}
+          {updated !== created && <p className="card-text" data-testid="card-updated">Último cambio: {updated.substr(0,10)}</p>}
         </div>
         {number !== null && (
-          <div className='buttons-card'>
-            <button className='btn btn-warning' onClick={() => selectMove(moveId)}>Cambiar</button>
-            <button className='btn btn-danger' onClick={() => deleteOneMovement(movement)}>Eliminar</button>
+          <div className='buttons-card' data-testid="card-buttons">
+            <button className='btn btn-warning' onClick={() => selectMove(moveId)} data-testid="card-update">Cambiar</button>
+            <button className='btn btn-danger' onClick={() => deleteOneMovement(movement)} data-testid="card-delete">Eliminar</button>
           </div>
         )}
       </div>

@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
-import Register from './components/signUp/Register';
-import Login from './components/login/Login';
 import Home from './components/home/Home';
 import { retrieveBalance } from './reducers/movementsReducer';
 import { existingLogin } from './reducers/loginReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { updatedMovementToNull } from './reducers/updatedMovementReducer';
-import UpdateConfirm from './components/balance-form/UpdateConfirm';
-import BalanceUpdateConfirm from './components/balance-form/BalanceUpdateConfirm';
-import MovementForm from './components/balance-form/MovementForm';
+import UpdateConfirm from './components/balance-form/MovementUpdate/UpdateConfirm';
+import BalanceUpdateConfirm from './components/balance-form/BalanceUpdate/BalanceUpdateConfirm';
+import LoginSubmit from './components/login/LoginSubmit';
+import RegisterSubmit from './components/signUp/RegisterSubmit';
+import MovementFormSubmit from './components/balance-form/MovementForm/MovementFormSubmit';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,10 +37,10 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/api/movements/movement/:id" element={<UpdateConfirm />}/>
-        <Route path="/api/movements/add/:id" element={<MovementForm />} />
+        <Route path="/api/movements/add/:id" element={<MovementFormSubmit />} />
         <Route path="/api/balance/update/:id" element={<BalanceUpdateConfirm />} />
-        <Route path="/api/user/register" element={<Register />}/>
-        <Route path="/api/user/login" element={<Login />}/>
+        <Route path="/api/user/register" element={<RegisterSubmit />}/>
+        <Route path="/api/user/login" element={<LoginSubmit />}/>
         <Route path="/" element={<Home />}/>
       </Routes>
     </div>
